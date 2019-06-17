@@ -124,6 +124,34 @@
         <input type="text" class="">
         <input type="button" value="denye nri a">
     </div>
+
+    <script>
+        /*get elements*/
+        let textBox = document.querySelector('input[type=text]');
+        let button = document.querySelector('input[type=button]');
+        let menu = document.querySelector('ul.menu');
+
+        /*add item to menu*/
+        function addItem(e) {
+            let text = textBox.value;
+            localStorage.setItem(text, false);
+            displayItem(text);
+        }
+
+        function displayItem(item) {
+            let listItem = document.createElement('li');
+            // let checkBox = document.createElement('input');
+
+            listItem.setAttribute('id', item);
+            // checkBox.setAttribute('type', 'check');
+
+            listItem.innerHTML = '<input type="checkbox" > <span>' + item + '</span>';
+            menu.append(listItem);
+        }
+
+        /*hook up event listeners*/
+        button.addEventListener('click', addItem);
+    </script>
 </body>
 
 </html>
