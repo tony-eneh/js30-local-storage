@@ -132,9 +132,22 @@
         let menu = document.querySelector('ul.menu');
 
         /*add item to menu*/
+        /*localStorage stores data as string only. So we use JSON.parse and JSON.stringify to 
+        read and write our menu object data respectively*/
         function addItem(e) {
             let text = textBox.value;
-            localStorage.setItem(text, false);
+            let menus = null;
+            menus = JSON.parse(localStorage.getItem('menus'));
+            if (!menus) {
+                menus = [];
+            }
+
+            console.log(typeof(menus));
+            menus.push({
+                [text]: false
+            });
+            localStorage.setItem('menus', JSON.stringify(menus));
+            console.log(menus.length);
             displayItem(text);
         }
 
