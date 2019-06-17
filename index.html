@@ -129,7 +129,7 @@
         /*get elements*/
         let textBox = document.querySelector('input[type=text]');
         let button = document.querySelector('input[type=button]');
-        let menu = document.querySelector('ul.menu');
+
 
         /*add item to menu*/
         /*localStorage stores data as string only. So we use JSON.parse and JSON.stringify to 
@@ -144,7 +144,8 @@
 
             console.log(typeof(menus));
             menus.push({
-                [text]: false
+                name: text,
+                checked: false
             });
             localStorage.setItem('menus', JSON.stringify(menus));
             console.log(menus.length);
@@ -152,14 +153,19 @@
         }
 
         function displayItem(item) {
-            let listItem = document.createElement('li');
             // let checkBox = document.createElement('input');
 
-            listItem.setAttribute('id', item);
             // checkBox.setAttribute('type', 'check');
+            let menuElement = document.querySelector('ul.menu');
+            menuElement.innerHTML = '';
+            let menus = JSON.parse(localStorage.getItem('menus'));
+            menus.forEach((item) => {
+                // let listItem = document.createElement('li');
+                // listItem.setAttribute('id', item);
 
-            listItem.innerHTML = '<input type="checkbox" > <span>' + item + '</span>';
-            menu.append(listItem);
+                menuElement.innerHTML += '<li id =' + item.name + '><input type="checkbox" checked=' + item.checked + ' > <span>' + item.name + '</span></li>';
+            });
+
         }
 
         /*hook up event listeners*/
