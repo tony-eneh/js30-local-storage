@@ -129,19 +129,14 @@
         /*get elements*/
         let textBox = document.querySelector('input[type=text]');
         let button = document.querySelector('input[type=button]');
-
+        let checkBoxes = document.querySelectorAll('input[type=checkbox]');
+        let menus = JSON.parse(localStorage.getItem('menus')) || [];
 
         /*add item to menu*/
         /*localStorage stores data as string only. So we use JSON.parse and JSON.stringify to 
         read and write our menu object data respectively*/
         function addItem(e) {
             let text = textBox.value;
-            let menus = null;
-            menus = JSON.parse(localStorage.getItem('menus'));
-            if (!menus) {
-                menus = [];
-            }
-
             console.log(typeof(menus));
             menus.push({
                 name: text,
@@ -149,16 +144,16 @@
             });
             localStorage.setItem('menus', JSON.stringify(menus));
             console.log(menus.length);
-            displayItem(text);
+            displayItems();
         }
 
-        function displayItem(item) {
+        function displayItems() {
             // let checkBox = document.createElement('input');
 
             // checkBox.setAttribute('type', 'check');
             let menuElement = document.querySelector('ul.menu');
             menuElement.innerHTML = '';
-            let menus = JSON.parse(localStorage.getItem('menus'));
+            menus = JSON.parse(localStorage.getItem('menus')) || [];
             menus.forEach((item) => {
                 // let listItem = document.createElement('li');
                 // listItem.setAttribute('id', item);
@@ -168,8 +163,20 @@
 
         }
 
+
+        function selectItem(e) {
+            console.log(e);
+            e.currentTarget.nextElementSibling.classList.add('selected');
+        }
+
+        /*automatically display menu items on reload*/
+        displayItems();
+
         /*hook up event listeners*/
         button.addEventListener('click', addItem);
+        checkBoxes.forEach((checkBox) => {
+            checkBox.addEventListener('input', selectItem)
+        });
     </script>
 </body>
 
