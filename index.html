@@ -34,6 +34,10 @@
             padding: 40px;
         }
         
+        .selected {
+            text-decoration: line-through;
+        }
+        
         svg path {
             fill: rgba(255, 255, 255, .5);
             /* stroke: rgba(255, 255, 255, .5); */
@@ -158,7 +162,7 @@
                 // let listItem = document.createElement('li');
                 // listItem.setAttribute('id', item);
 
-                menuElement.innerHTML += '<li id =' + item.name + '><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" > <span>' + item.name + '</span></li>';
+                menuElement.innerHTML += '<li id =' + item.name + '><label><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" >' + item.name + '</label></li>';
             });
 
         }
@@ -166,7 +170,7 @@
 
         function selectItem(e) {
             console.log(e);
-            e.currentTarget.nextElementSibling.classList.('selected');
+            this.parentElement.classList.toggle('selected')
         }
 
         /*automatically display menu items on reload*/
@@ -175,7 +179,7 @@
         /*hook up event listeners*/
         button.addEventListener('click', addItem);
         Array.from(checkBoxes).forEach((checkBox) => {
-            checkBox.addEventListener('input', selectItem)
+            checkBox.addEventListener('input', selectItem);
         });
     </script>
 </body>
