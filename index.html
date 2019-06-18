@@ -170,19 +170,18 @@
 
 
         function toggleSelect(self) {
-            console.log(self);
-            // let self = this;
-            menus.forEach((item) => {
-                if (self == item) {
-                    console.log('i don catsh am');
-                    item.toggleAttribute('checked');
-                } else {
-                    console.log('i no fit find am');
-                }
-            });
-            console.log('see the bastard here', self);
-
             self.parentElement.classList.toggle('selected');
+
+            //save new state
+            menus = [];
+            Array.from(checkBoxes).forEach((checkBox) => {
+                let data = {
+                    name: checkBox.parentElement.textContent,
+                    checked: !!checkBox.checked
+                };
+                menus.push(data);
+            })
+            localStorage.setItem('menus', JSON.stringify(menus));
         }
 
         /*automatically display menu items on reload*/
