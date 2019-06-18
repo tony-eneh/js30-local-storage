@@ -163,7 +163,7 @@
                 // let listItem = document.createElement('li');
                 // listItem.setAttribute('id', item);
 
-                menuElement.innerHTML += '<li id =' + item.name + '><label><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" onclick ="toggleSelect(this)" >' + item.name + '</label></li>';
+                menuElement.innerHTML += '<li id =' + item.name + '><label class="' + (item.checked ? 'selected' : '') + '"><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" onclick ="toggleSelect(this)" >' + item.name + '</label></li>';
             });
 
         }
