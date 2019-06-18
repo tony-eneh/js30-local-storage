@@ -163,15 +163,26 @@
                 // let listItem = document.createElement('li');
                 // listItem.setAttribute('id', item);
 
-                menuElement.innerHTML += '<li id =' + item.name + '><label><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" >' + item.name + '</label></li>';
+                menuElement.innerHTML += '<li id =' + item.name + '><label><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" onclick ="toggleSelect(this)" >' + item.name + '</label></li>';
             });
 
         }
 
 
-        function toggleSelect(e) {
-            console.log(e);
-            this.parentElement.classList.toggle('selected');
+        function toggleSelect(self) {
+            console.log(self);
+            // let self = this;
+            menus.forEach((item) => {
+                if (self == item) {
+                    console.log('i don catsh am');
+                    item.toggleAttribute('checked');
+                } else {
+                    console.log('i no fit find am');
+                }
+            });
+            console.log('see the bastard here', self);
+
+            self.parentElement.classList.toggle('selected');
         }
 
         /*automatically display menu items on reload*/
@@ -180,9 +191,13 @@
         /*hook up event listeners*/
         button.addEventListener('click', addItem);
         textBox.addEventListener('change', addItem);
-        Array.from(checkBoxes).forEach((checkBox) => {
-            checkBox.addEventListener('input', toggleSelect);
-        });
+
+        /*the following event listener is removed from here and
+        added inline in order for it to run even if there was no
+        checkBox on initial page load.*/
+        // Array.from(checkBoxes).forEach((checkBox) => {
+        //     checkBox.addEventListener('input', toggleSelect);
+        // });
     </script>
 </body>
 
