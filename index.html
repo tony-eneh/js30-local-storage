@@ -129,7 +129,7 @@
         /*get elements*/
         let textBox = document.querySelector('input[type=text]');
         let button = document.querySelector('input[type=button]');
-        let checkBoxes = document.querySelectorAll('input[type=checkbox]');
+        let checkBoxes = document.getElementsByClassName('check');
         let menus = JSON.parse(localStorage.getItem('menus')) || [];
 
         /*add item to menu*/
@@ -158,7 +158,7 @@
                 // let listItem = document.createElement('li');
                 // listItem.setAttribute('id', item);
 
-                menuElement.innerHTML += '<li id =' + item.name + '><input type="checkbox"' + (item.checked ? 'checked' : '') + ' > <span>' + item.name + '</span></li>';
+                menuElement.innerHTML += '<li id =' + item.name + '><input type="checkbox"' + (item.checked ? 'checked' : '') + ' class="check" > <span>' + item.name + '</span></li>';
             });
 
         }
@@ -166,7 +166,7 @@
 
         function selectItem(e) {
             console.log(e);
-            e.currentTarget.nextElementSibling.classList.add('selected');
+            e.currentTarget.nextElementSibling.classList.('selected');
         }
 
         /*automatically display menu items on reload*/
@@ -174,7 +174,7 @@
 
         /*hook up event listeners*/
         button.addEventListener('click', addItem);
-        checkBoxes.forEach((checkBox) => {
+        Array.from(checkBoxes).forEach((checkBox) => {
             checkBox.addEventListener('input', selectItem)
         });
     </script>
