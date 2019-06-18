@@ -169,9 +169,9 @@
         }
 
 
-        function selectItem(e) {
+        function toggleSelect(e) {
             console.log(e);
-            this.parentElement.classList.toggle('selected')
+            this.parentElement.classList.toggle('selected');
         }
 
         /*automatically display menu items on reload*/
@@ -179,8 +179,9 @@
 
         /*hook up event listeners*/
         button.addEventListener('click', addItem);
+        textBox.addEventListener('change', addItem);
         Array.from(checkBoxes).forEach((checkBox) => {
-            checkBox.addEventListener('input', selectItem);
+            checkBox.addEventListener('input', toggleSelect);
         });
     </script>
 </body>
